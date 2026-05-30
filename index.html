@@ -1,0 +1,759 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Olde Leather Bottle — Leverstock Green · A pub since 1725</title>
+<meta name="description" content="A long oak-beamed local on the old road through Leverstock Green. Real ale, real fire, three rooms on three levels — pouring since 1725.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,400;9..144,600;9..144,800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a120c;
+    --paper: #f4ead4;
+    --paper-warm: #ebdcb6;
+    --walnut: #3b2218;
+    --saddle: #7e3b1c;
+    --oxblood: #5a1f15;
+    --brass: #b9893f;
+    --candle: #e8b659;
+    --hairline: rgba(26,18,12,.22);
+    --font-display: "Fraunces", "Hoefler Text", Georgia, serif;
+    --font-body: "Newsreader", "Iowan Old Style", Georgia, serif;
+    --rhythm: clamp(1rem, .8rem + .5vw, 1.18rem);
+    --measure: 62ch;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: var(--rhythm);
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  body::before {
+    content: "";
+    position: fixed; inset: 0;
+    background-image:
+      radial-gradient(rgba(58,32,20,.045) 1px, transparent 1px),
+      radial-gradient(rgba(58,32,20,.03) 1px, transparent 1px);
+    background-size: 3px 3px, 7px 7px;
+    background-position: 0 0, 1px 2px;
+    pointer-events: none;
+    z-index: 1;
+    mix-blend-mode: multiply;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    margin: 0;
+    text-wrap: balance;
+    letter-spacing: -0.015em;
+    line-height: 1;
+  }
+  p { text-wrap: pretty; hyphens: auto; max-width: var(--measure); margin: 0 0 1em; }
+
+  a { color: inherit; text-decoration: none; }
+
+  /* ---- ribbon ------------------------------------------------------ */
+
+  .ribbon {
+    position: relative; z-index: 4;
+    background: var(--walnut);
+    color: var(--paper);
+    font-size: .82rem;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    overflow: hidden;
+    border-bottom: 1px solid var(--ink);
+  }
+  .ribbon__track {
+    display: inline-flex;
+    gap: 3.5rem;
+    padding: .58rem 0;
+    white-space: nowrap;
+    animation: scroll 48s linear infinite;
+  }
+  .ribbon__track span::before {
+    content: "·";
+    margin-right: 3.5rem;
+    color: var(--candle);
+  }
+  @keyframes scroll { to { transform: translateX(-50%); } }
+  @media (prefers-reduced-motion: reduce) {
+    .ribbon__track { animation: none; }
+  }
+
+  /* ---- masthead ---------------------------------------------------- */
+
+  .masthead {
+    position: relative;
+    padding: 1.4rem clamp(1.2rem, 4vw, 3rem) 0;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 1.5rem;
+    align-items: center;
+    z-index: 3;
+  }
+  .crest {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 1.05rem;
+    letter-spacing: -0.01em;
+    line-height: 1;
+  }
+  .crest small {
+    display: block;
+    font-family: var(--font-body);
+    font-style: italic;
+    font-weight: 400;
+    font-size: .78rem;
+    color: var(--walnut);
+    letter-spacing: .04em;
+    margin-top: .15rem;
+  }
+  .nav {
+    justify-self: center;
+    display: flex; gap: 1.6rem;
+    font-size: .92rem;
+    font-style: italic;
+  }
+  .nav a {
+    position: relative;
+    padding-bottom: 2px;
+  }
+  .nav a::after {
+    content: "";
+    position: absolute; left: 0; right: 100%; bottom: 0;
+    height: 1px; background: var(--ink);
+    transition: right .3s ease;
+  }
+  .nav a:hover::after { right: 0; }
+
+  .call {
+    justify-self: end;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1rem;
+    padding: .55rem 1rem;
+    border: 1px solid var(--ink);
+    background: var(--paper-warm);
+    transition: background .3s, color .3s;
+  }
+  .call:hover { background: var(--ink); color: var(--paper); }
+
+  @media (max-width: 760px) {
+    .masthead { grid-template-columns: 1fr auto; }
+    .nav { display: none; }
+  }
+
+  /* ---- hero -------------------------------------------------------- */
+
+  .hero {
+    position: relative;
+    padding: clamp(2rem, 5vw, 4rem) clamp(1.2rem, 4vw, 3rem) clamp(3rem, 7vw, 6rem);
+    overflow: hidden;
+    z-index: 2;
+  }
+  .hero__year {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(9rem, 28vw, 26rem);
+    line-height: .82;
+    letter-spacing: -0.06em;
+    color: transparent;
+    -webkit-text-stroke: 1.5px var(--walnut);
+    text-stroke: 1.5px var(--walnut);
+    margin-left: -.04em;
+    user-select: none;
+    background: linear-gradient(180deg, transparent 0%, transparent 55%, rgba(184,138,63,.18) 55%, rgba(184,138,63,.05) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+  }
+  .hero__plate {
+    margin-top: clamp(-2rem, -3vw, -1rem);
+    display: grid;
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+    gap: clamp(1.2rem, 3vw, 3rem);
+    align-items: end;
+  }
+  .hero__name {
+    font-size: clamp(2.4rem, 6vw, 5rem);
+    line-height: .94;
+    font-weight: 600;
+  }
+  .hero__name .ampersand {
+    font-style: italic;
+    font-weight: 400;
+    color: var(--saddle);
+  }
+  .hero__name .olde {
+    font-style: italic;
+    color: var(--saddle);
+    font-weight: 500;
+  }
+  .hero__copy {
+    padding-bottom: .4rem;
+  }
+  .hero__rule {
+    width: 3rem; height: 2px;
+    background: var(--ink);
+    margin-bottom: .9rem;
+  }
+  .hero__tagline {
+    font-size: 1.08rem;
+    line-height: 1.5;
+    font-style: italic;
+    color: var(--walnut);
+    margin-bottom: 1.1rem;
+  }
+  .hero__sub {
+    font-size: .9rem;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--walnut);
+  }
+  .hero__sub::before {
+    content: "—  ";
+    color: var(--saddle);
+  }
+  @media (max-width: 760px) {
+    .hero__plate { grid-template-columns: 1fr; }
+    .hero__year { font-size: clamp(7rem, 36vw, 14rem); }
+  }
+
+  /* ---- three rooms ------------------------------------------------- */
+
+  .rooms {
+    position: relative;
+    padding: clamp(3rem, 6vw, 6rem) clamp(1.2rem, 4vw, 3rem);
+    background: var(--walnut);
+    color: var(--paper);
+    z-index: 2;
+  }
+  .rooms::after {
+    content: "";
+    position: absolute; inset: auto 0 -1px 0;
+    height: 60px;
+    background: linear-gradient(180deg, transparent, rgba(0,0,0,.25));
+    pointer-events: none;
+  }
+  .rooms__head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 2rem;
+    margin-bottom: clamp(2rem, 4vw, 3.5rem);
+    flex-wrap: wrap;
+  }
+  .rooms__head h2 {
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: 600;
+  }
+  .rooms__head h2 em {
+    font-style: italic;
+    color: var(--candle);
+    font-weight: 400;
+  }
+  .rooms__lede {
+    font-style: italic;
+    font-size: 1.05rem;
+    max-width: 32ch;
+    color: rgba(244,234,212,.75);
+    margin: 0;
+  }
+
+  .rooms__list {
+    display: grid;
+    gap: clamp(1.2rem, 2vw, 2rem);
+  }
+  .room {
+    display: grid;
+    grid-template-columns: clamp(3rem, 6vw, 5rem) 1fr;
+    gap: clamp(1rem, 2vw, 2rem);
+    padding-top: 1.4rem;
+    border-top: 1px solid rgba(244,234,212,.18);
+  }
+  .room:nth-child(1) { margin-left: 0; }
+  .room:nth-child(2) { margin-left: clamp(1rem, 4vw, 4rem); }
+  .room:nth-child(3) { margin-left: clamp(2rem, 8vw, 8rem); }
+  .room__num {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    font-style: italic;
+    font-weight: 400;
+    color: var(--candle);
+    line-height: 1;
+  }
+  .room h3 {
+    font-size: clamp(1.4rem, 2.3vw, 2rem);
+    margin-bottom: .6rem;
+  }
+  .room p {
+    color: rgba(244,234,212,.85);
+    font-size: 1rem;
+    line-height: 1.55;
+    max-width: 48ch;
+  }
+
+  @supports (animation-timeline: view()) {
+    .room { animation: rise both; animation-timeline: view(); animation-range: entry 0% cover 25%; }
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(1.5rem); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+  }
+
+  /* ---- bar / what we pour ----------------------------------------- */
+
+  .bar {
+    position: relative;
+    padding: clamp(3rem, 6vw, 6rem) clamp(1.2rem, 4vw, 3rem);
+    z-index: 2;
+  }
+  .bar__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr);
+    gap: clamp(2rem, 5vw, 5rem);
+    align-items: start;
+  }
+  .bar h2 {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 600;
+    margin-bottom: 1rem;
+  }
+  .bar h2 em {
+    font-style: italic;
+    color: var(--saddle);
+    font-weight: 400;
+  }
+  .bar__intro {
+    font-style: italic;
+    color: var(--walnut);
+    font-size: 1.05rem;
+  }
+  .pours {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border-top: 1px solid var(--hairline);
+  }
+  .pours li {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: baseline;
+    gap: .9rem;
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--hairline);
+  }
+  .pours .pour__name {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.3rem;
+  }
+  .pours .pour__dots {
+    align-self: end;
+    border-bottom: 1px dotted rgba(26,18,12,.4);
+    height: 1px;
+    transform: translateY(-.45rem);
+  }
+  .pours .pour__note {
+    font-style: italic;
+    color: var(--walnut);
+    font-size: .9rem;
+  }
+  .pours .pour__sub {
+    grid-column: 1 / -1;
+    margin-top: -.4rem;
+    color: rgba(26,18,12,.7);
+    font-size: .95rem;
+    max-width: 52ch;
+  }
+
+  @media (max-width: 800px) {
+    .bar__grid { grid-template-columns: 1fr; }
+  }
+
+  /* ---- what's on --------------------------------------------------- */
+
+  .events {
+    position: relative;
+    padding: clamp(3rem, 6vw, 6rem) clamp(1.2rem, 4vw, 3rem);
+    background: var(--paper-warm);
+    border-top: 1px solid var(--hairline);
+    border-bottom: 1px solid var(--hairline);
+    z-index: 2;
+  }
+  .events__head { margin-bottom: 2rem; }
+  .events h2 {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 600;
+  }
+  .events h2 em {
+    font-style: italic;
+    color: var(--saddle);
+    font-weight: 400;
+  }
+  .events__lede {
+    font-style: italic;
+    color: var(--walnut);
+    margin-top: .8rem;
+    max-width: 52ch;
+  }
+  .events__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1rem 1.5rem;
+    margin-top: 2rem;
+  }
+  .ev {
+    padding: 1.2rem 0;
+    border-top: 1px solid var(--hairline);
+  }
+  .ev h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: .35rem;
+  }
+  .ev p {
+    color: var(--walnut);
+    font-size: .95rem;
+    margin: 0;
+  }
+
+  .events__note {
+    margin-top: 2.4rem;
+    font-style: italic;
+    color: var(--walnut);
+    font-size: .98rem;
+  }
+  .events__note a {
+    border-bottom: 1px solid var(--saddle);
+    color: var(--saddle);
+  }
+
+  /* ---- visit ------------------------------------------------------- */
+
+  .visit {
+    position: relative;
+    padding: clamp(3rem, 6vw, 6rem) clamp(1.2rem, 4vw, 3rem) clamp(2rem, 5vw, 4rem);
+    background: var(--ink);
+    color: var(--paper);
+    z-index: 2;
+  }
+  .visit__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr) minmax(0, 1fr);
+    gap: clamp(2rem, 4vw, 4rem);
+  }
+  .visit h2 {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 600;
+    margin-bottom: 1.2rem;
+  }
+  .visit h2 em {
+    font-style: italic;
+    color: var(--candle);
+    font-weight: 400;
+  }
+  .visit h3 {
+    font-family: var(--font-body);
+    font-size: .82rem;
+    font-style: italic;
+    font-weight: 400;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: rgba(244,234,212,.6);
+    margin-bottom: 1rem;
+  }
+  .visit address {
+    font-style: normal;
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+    line-height: 1.4;
+  }
+  .visit__intro {
+    font-style: italic;
+    color: rgba(244,234,212,.78);
+    max-width: 36ch;
+    margin: 0 0 1.6rem;
+  }
+  .visit__phone {
+    display: inline-block;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.6rem;
+    margin-top: .8rem;
+    color: var(--candle);
+    border-bottom: 1px solid rgba(232,182,89,.4);
+    padding-bottom: 2px;
+  }
+  .visit__phone:hover { border-color: var(--candle); }
+
+  .hours {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border-top: 1px solid rgba(244,234,212,.18);
+  }
+  .hours li {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+    padding: .65rem 0;
+    border-bottom: 1px solid rgba(244,234,212,.12);
+    font-size: .98rem;
+  }
+  .hours .day { font-style: italic; color: rgba(244,234,212,.7); }
+  .hours .time { font-family: var(--font-display); font-weight: 500; }
+
+  .visit__socials {
+    display: flex; gap: 1rem;
+    margin-top: 1rem;
+    font-style: italic;
+    font-size: .95rem;
+  }
+  .visit__socials a {
+    border-bottom: 1px solid rgba(244,234,212,.3);
+    padding-bottom: 1px;
+  }
+  .visit__socials a:hover { border-color: var(--candle); color: var(--candle); }
+
+  .visit__map {
+    margin-top: 1rem;
+    font-style: italic;
+    color: rgba(244,234,212,.65);
+    font-size: .9rem;
+  }
+  .visit__map a {
+    color: var(--candle);
+    border-bottom: 1px solid rgba(232,182,89,.4);
+  }
+
+  @media (max-width: 900px) {
+    .visit__grid { grid-template-columns: 1fr; gap: 2.5rem; }
+  }
+
+  /* ---- foot ------------------------------------------------------- */
+
+  .foot {
+    background: var(--ink);
+    color: rgba(244,234,212,.55);
+    padding: 1.4rem clamp(1.2rem, 4vw, 3rem);
+    font-size: .82rem;
+    border-top: 1px solid rgba(244,234,212,.12);
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+    letter-spacing: .04em;
+    position: relative;
+    z-index: 2;
+  }
+  .foot em {
+    font-style: italic;
+    color: var(--candle);
+    opacity: .8;
+  }
+</style>
+</head>
+<body>
+
+<div class="ribbon" aria-hidden="true">
+  <div class="ribbon__track">
+    <span>Real ale</span>
+    <span>Real fire</span>
+    <span>Three rooms · three levels</span>
+    <span>Pouring since 1725</span>
+    <span>Live music &amp; events</span>
+    <span>Dogs welcome everywhere</span>
+    <span>Garden &amp; parking</span>
+    <span>Leverstock Green Road · HP3 8QQ</span>
+    <span>Real ale</span>
+    <span>Real fire</span>
+    <span>Three rooms · three levels</span>
+    <span>Pouring since 1725</span>
+    <span>Live music &amp; events</span>
+    <span>Dogs welcome everywhere</span>
+    <span>Garden &amp; parking</span>
+    <span>Leverstock Green Road · HP3 8QQ</span>
+  </div>
+</div>
+
+<header class="masthead">
+  <div class="crest">
+    The Leather Bottle
+    <small>Leverstock Green · est. 1725</small>
+  </div>
+  <nav class="nav" aria-label="Sections">
+    <a href="#rooms">The Rooms</a>
+    <a href="#bar">At the Bar</a>
+    <a href="#events">What's On</a>
+    <a href="#visit">Find Us</a>
+  </nav>
+  <a class="call" href="tel:+441442239911">01442 239911</a>
+</header>
+
+<section class="hero" aria-labelledby="h1">
+  <div class="hero__year" aria-hidden="true">1725</div>
+  <div class="hero__plate">
+    <h1 class="hero__name" id="h1">
+      The <span class="olde">Olde</span><br>
+      Leather Bottle
+    </h1>
+    <div class="hero__copy">
+      <div class="hero__rule" aria-hidden="true"></div>
+      <p class="hero__tagline">A pub since 1725, the long oak-beamed bar is divided into three distinct areas on different levels.</p>
+      <p class="hero__sub">A local for locals on the road through Leverstock Green</p>
+    </div>
+  </div>
+</section>
+
+<section class="rooms" id="rooms" aria-labelledby="rooms-h">
+  <div class="rooms__head">
+    <h2 id="rooms-h">Three rooms, <em>three levels</em>, one fire.</h2>
+    <p class="rooms__lede">The bar steps down and around the building as it has done for three hundred years. Pick the corner that suits the evening.</p>
+  </div>
+  <div class="rooms__list">
+    <article class="room">
+      <div class="room__num">I.</div>
+      <div>
+        <h3>The Front Bar</h3>
+        <p>Beams overhead, glass in hand, eye on the door. Where the regulars gather, the cask comes through clear, and the conversation is comfortable enough to be overheard.</p>
+      </div>
+    </article>
+    <article class="room">
+      <div class="room__num">II.</div>
+      <div>
+        <h3>The Snug</h3>
+        <p>A quieter step down toward the fire. Newspapers on the rail, the dog asleep by the hearth. Slower, softer, sat-in for the long Sunday afternoon.</p>
+      </div>
+    </article>
+    <article class="room">
+      <div class="room__num">III.</div>
+      <div>
+        <h3>The Back Room &amp; Garden</h3>
+        <p>Tables for groups, a stage for the live nights, and a roadside patio plus rear garden when the weather behaves. Family-friendly throughout, dogs welcome everywhere.</p>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section class="bar" id="bar" aria-labelledby="bar-h">
+  <div class="bar__grid">
+    <div>
+      <h2 id="bar-h">At the <em>bar</em>.</h2>
+      <p class="bar__intro">A regular cask from Greene King, a pair of rotating taps that lean local, and the usual roll-call of wines, ciders and spirits. Honest pricing, properly kept.</p>
+    </div>
+    <ul class="pours">
+      <li>
+        <span class="pour__name">Greene King IPA</span>
+        <span class="pour__dots" aria-hidden="true"></span>
+        <span class="pour__note">on regular cask</span>
+      </li>
+      <li>
+        <span class="pour__name">Two changing beers</span>
+        <span class="pour__dots" aria-hidden="true"></span>
+        <span class="pour__note">often from Tring</span>
+        <span class="pour__sub">Rotating guest taps lean toward local Hertfordshire brewers — ask what's on tonight.</span>
+      </li>
+      <li>
+        <span class="pour__name">Wine &amp; cider</span>
+        <span class="pour__dots" aria-hidden="true"></span>
+        <span class="pour__note">house list</span>
+      </li>
+      <li>
+        <span class="pour__name">Spirits &amp; soft</span>
+        <span class="pour__dots" aria-hidden="true"></span>
+        <span class="pour__note">the full back-bar</span>
+      </li>
+      <li>
+        <span class="pour__name">Weekend kitchen</span>
+        <span class="pour__dots" aria-hidden="true"></span>
+        <span class="pour__note">Fri – Sun</span>
+        <span class="pour__sub">Lunchtime and evening meals served Friday through Sunday. Sunday lunch is the one to plan around.</span>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<section class="events" id="events" aria-labelledby="events-h">
+  <div class="events__head">
+    <h2 id="events-h">What's <em>on</em> the week.</h2>
+    <p class="events__lede">The Leather Bottle has run a rotation of weekly nights for as long as anyone here can remember — sport on the screens, music on the stage, and quieter rooms for those after a pint and a paper.</p>
+  </div>
+  <div class="events__grid">
+    <div class="ev">
+      <h3>Live Music</h3>
+      <p>Local acts on the stage in the back room. Free entry, drinks behind the bar.</p>
+    </div>
+    <div class="ev">
+      <h3>Sport on the Screens</h3>
+      <p>TNT Sport up in the front bar. Big fixtures, big crowd, no cover.</p>
+    </div>
+    <div class="ev">
+      <h3>Sunday Roast</h3>
+      <p>Traditional Sunday roast served from the kitchen — the one to plan the weekend around.</p>
+    </div>
+    <div class="ev">
+      <h3>Real Fire Nights</h3>
+      <p>When the cold draws in, the hearth comes alive. Pint, paper, the dog at your feet.</p>
+    </div>
+  </div>
+  <p class="events__note">For this week's running order — bands, quizzes, special nights — keep an eye on the <a href="https://www.facebook.com/theoldeleatherbottle/" rel="noopener" target="_blank">Leather Bottle Facebook page</a>, where it's all posted as it lands.</p>
+</section>
+
+<section class="visit" id="visit" aria-labelledby="visit-h">
+  <div class="visit__grid">
+    <div>
+      <h2 id="visit-h">Find <em>the door</em>.</h2>
+      <p class="visit__intro">On the old road through Leverstock Green, the white-fronted building with the leather-bottle sign over the porch. Roadside patio, rear garden, car park.</p>
+      <h3>Address</h3>
+      <address>
+        Leverstock Green Road,<br>
+        Leverstock Green,<br>
+        Hemel Hempstead, HP3 8QQ
+      </address>
+      <p class="visit__map">
+        <a href="https://www.google.com/maps/search/?api=1&amp;query=The+Olde+Leather+Bottle+Leverstock+Green+HP3+8QQ" rel="noopener" target="_blank">Open in Google Maps →</a>
+      </p>
+    </div>
+
+    <div>
+      <h3>Phone</h3>
+      <a class="visit__phone" href="tel:+441442239911">01442 239911</a>
+      <h3 style="margin-top:2rem;">Follow along</h3>
+      <div class="visit__socials">
+        <a href="https://www.facebook.com/theoldeleatherbottle/" rel="noopener" target="_blank">Facebook</a>
+      </div>
+    </div>
+
+    <div>
+      <h3>Hours</h3>
+      <ul class="hours">
+        <li><span class="day">Mon – Thu</span><span class="time">Noon – 11:30pm</span></li>
+        <li><span class="day">Friday</span><span class="time">Noon – 1:00am</span></li>
+        <li><span class="day">Saturday</span><span class="time">Noon – 1:00am</span></li>
+        <li><span class="day">Sunday</span><span class="time">Noon – 11:30pm</span></li>
+        <li><span class="day">Kitchen</span><span class="time">Fri – Sun</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<footer class="foot">
+  <div>The Olde Leather Bottle &middot; Leverstock Green Road &middot; HP3 8QQ</div>
+  <div><em>Pouring since 1725.</em></div>
+</footer>
+
+</body>
+</html>
